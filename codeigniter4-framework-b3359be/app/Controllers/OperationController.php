@@ -2,21 +2,20 @@
 
 namespace App\Controllers;
 
-use App\Models\PrefixeModel;
-use App\Models\FraisBaremeModel;
+use App\Models\PrefixesModele;
+use App\Models\FraisBaremesModele;
 use App\Models\ComptesModele;
 
 class OperationController extends BaseController
 { 
-     protected $prefixeModel;
+    protected $prefixeModel;
     protected $fraisModel;
     protected $comptesModel;
 
     public function __construct()
     {
-        $this->prefixeModel = new PrefixeModel();
-        $this->fraisModel = new FraisBaremeModel();
-        $this->comptesModel = new ComptesModele();
+        $this->prefixeModel = new PrefixesModele();
+        $this->fraisModel = new FraisBaremesModele();
     }
 
     public function index()
@@ -51,29 +50,26 @@ class OperationController extends BaseController
 
     public function obtenirCalculFraisAjax()
 {
-
     $typeId = $this->request->getGet('type_id');
     $montant = $this->request->getGet('montant');
 
-    if (empty($typeId) || empty($montant)) {
-        return $this->response->setJSON(['status' => 'error', 'message' => 'Données manquantes']);
-    }
+        if (empty($typeId) || empty($montant)) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Données manquantes']);
+        }
 
-    $montantTotal = $this->calcul_montant_frais($typeId, $montant);
+        $montantTotal = $this->calcul_montant_frais($typeId, $montant);
 
-    if ($montantTotal === null) {
-        return $this->response->setJSON(['status' => 'error', 'message' => 'Montant en dehors des tranches disponibles.']);
-    }
+        if ($montantTotal === null) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Montant en dehors des tranches disponibles.']);
+        }
 
     // On récupère aussi juste la valeur des frais pour l'afficher
     $bareme = $this->fraisModel->getFraisByMontant($typeId, $montant);
-    $solde = $this->comptesModel->getSoldeFrais($this->request->getGet('compte_id'), $bareme['frais']);
 
     return $this->response->setJSON([
         'status' => 'success',
         'frais' => $bareme['frais'],
-        'total' => $montantTotal,
-        'solde' => $solde
+        'total' => $montantTotal
     ]);
 }
 

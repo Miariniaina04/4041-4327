@@ -6,11 +6,12 @@ use App\Models\TransactionsModele;
 
 class TransactionController extends BaseController
 { 
+    protected $transaction;
     protected $fraisModel;
 
     public function __construct()
     {
-        $this->transaction = new TransactionsModel();
+        $this->transaction = new TransactionsModele();
     }
 
     public function index()

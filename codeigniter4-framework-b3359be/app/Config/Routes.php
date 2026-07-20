@@ -8,7 +8,10 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 
 $routes->get('/client/dashboard', 'ClientController::dashboard');
+$routes->get('/client/formOperation','ClientController::formOperation');
 $routes->post('/login', 'ClientController::login');
+$routes->get('/logout', 'ClientController::logout');
+
 $routes->get('/client/operation', 'OperationController::index'); 
 $routes->get('/client/operation/calcul-frais-ajax', 'OperationController::obtenirCalculFraisAjax');
 $routes->get('/client/transaction', 'TransactionController::index'); 

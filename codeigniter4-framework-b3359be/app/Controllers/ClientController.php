@@ -42,8 +42,29 @@ class ClientController extends BaseController
         session()->set('user_phone',$compte['telephone']);
         return redirect()->to('/client/dashboard');
     }
+
+    /**
+     * Déconnexion de l'utilisateur
+     */
+    public function logout()
+    {
+        // Supprimer toutes les données de session
+        session()->remove(['user_id', 'user_phone']);
+        
+        // Ou détruire complètement la session
+        session()->destroy();
+        
+        // Redirection vers la page de login avec message
+        return redirect()->to('/login')
+                        ->with('success', 'Vous avez été déconnecté avec succès.');
+    }
+
     public function dashboard(){
         return view('client/dashboard');
+    }
+
+    public function formOperation(){
+        return view('view/formOperation');
     }
 
     public function saveTransaction()
@@ -57,9 +78,9 @@ class ClientController extends BaseController
         $telephone       = session()->get('telephone');
 
         // Chargement des modèles
-        $compteModel     = new \App\Models\CompteModel();
-        $transactionModel = new \App\Models\TransactionModel();
-        $fraisModel      = new \App\Models\FraisBaremeModel();
+        $compteModel     = new ComptesModele();
+        $transactionModel = new TransactionsModele();
+        $fraisModel      = new FraisBaremesModele();
 
         $expediteur = $compteModel->where('telephone', $telephone)->first();
 
@@ -68,7 +89,7 @@ class ClientController extends BaseController
         }
 
         // Récupérer le nom du type d'opération
-        $operationTypeModel = new \App\Models\OperationTypeModel();
+        $operationTypeModel = new OperationTypesModele();
         $typeOperation = $operationTypeModel->find($typeOperationId);
 
         if (!$typeOperation) {

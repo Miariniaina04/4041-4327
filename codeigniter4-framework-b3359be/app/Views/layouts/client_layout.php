@@ -7,11 +7,7 @@
 
 <div class="app-wrapper">
 
-    <?= view('partials/sidebar_client') ?>
-
     <div class="main-content">
-
-        <?= view('partials/topbar') ?>
 
         <div class="page-content">
             <?= $this->renderSection('content') ?>

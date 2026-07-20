@@ -82,3 +82,31 @@
 - [ ] Mise à jour de `base.sql` avec données de test
 - [ ] Documentation dans README.md (instructions d'installation)
 - [ ] Commit + Tag `v1`
+
+## Version 2 (v2)
+
+**Date de livraison :** [Mettre la date] - Tag : v2
+
+### Étudiant 1 : [Nom]
+- [ ] Configuration des préfixes pour les autres opérateurs (032, 031, etc.)
+- [ ] Ajout du champ `commission_pourcentage` dans les préfixes ou une nouvelle table
+- [ ] Gestion des transferts inter-opérateurs avec commission supplémentaire
+- [ ] Mise à jour du calcul des frais pour transferts vers autres opérateurs
+- [ ] Page "Situation gain" : séparation Opérateur principal vs Autres opérateurs
+- [ ] Situation des montants à envoyer à chaque opérateur (reporting)
+
+### Étudiant 2 : [Nom]
+- [ ] Option "inclure frais de retrait" lors de l'envoi (transfert)
+- [ ] Envoi multiple vers plusieurs numéros (diviser le montant équitablement)
+- [ ] Mise à jour du formulaire de transfert pour supporter plusieurs destinataires
+- [ ] Amélioration de l'interface client (Bootstrap)
+
+### Tâches communes
+- [ ] Mise à jour de `base.sql` (nouvelles colonnes / tables si nécessaire)
+- [ ] Modification des modèles (CompteModel, FraisBaremeModel, etc.)
+- [ ] Mise à jour des contrôleurs pour les nouvelles fonctionnalités
+- [ ] Tests des transferts inter-opérateurs et envoi multiple
+- [ ] Mise à jour du tableau de bord opérateur
+- [ ] Commit + création du Tag `v2`
+
+**Statut Version 2 :** En cours 
