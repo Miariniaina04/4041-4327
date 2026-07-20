@@ -56,6 +56,33 @@ class OperationController extends BaseController
             return $montant + $bareme['frais'];
     }
 
+    public function verifierPrefixeCompteDestinataire($telComptes,$telDest)
+    {
+        $prefixeCompte = substr($telComptes, 0, 3);
+        $prefixeDest = substr($telDest, 0, 3);
+
+        $operateurCompte = $this->prefixeModel->getOperateurByPrefixe($prefixeCompte);
+        $operateurDest = $this->prefixeModel->getOperateurByPrefixe($prefixeDest);
+
+        if ($operateurCompte = $operateurDest) {
+            return true; 
+        }
+        else {
+            return false; 
+        }
+    }
+
+    public function soumissionTransfert($telComptes, $montant, $telephoneDest, $typeId)
+    {
+        $prefixe = $this->prefixeModele->verifierPrefixeCompteDestinataire($telComptes, $telephoneDest);
+        if ($prefixe == true) {
+            $frais = $this->calcul_montant_frais($typeId, $montant);
+        } else {
+            $frais = $this->fraisModel->commissionTransfert($montant);
+        }
+
+        return $frais;
+    }
 
     public function obtenirCalculFraisAjax()
     {
@@ -87,10 +114,8 @@ class OperationController extends BaseController
             ]);
         }
 
-        // Récupération du barème pour avoir le montant des frais
-        $bareme = $this->fraisModel->getFraisByMontant($typeId, $montant);
-
-        $frais = $bareme ? (float)$bareme['frais'] : 0;
+    // On récupère aussi juste la valeur des frais pour l'afficher
+    $bareme = $this->fraisModel->getFraisByMontant($typeId, $montant);
 
         return $this->response->setJSON([
             'status' => 'success',

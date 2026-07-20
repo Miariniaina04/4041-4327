@@ -4,23 +4,16 @@ namespace App\Controllers;
 
 use App\Models\TransactionsModele;
 use App\Models\ComptesModele;
-use App\Models\FraisBaremesModele;
-use App\Models\PrefixesModele;
-
 
 class TransactionController extends BaseController
 { 
     protected $transaction;
     protected $fraisModel;
-    protected $compteModel;
-    protected $prefixeModel;
 
     public function __construct()
     {
+        $this->comptesModel = new ComptesModele();
         $this->transaction = new TransactionsModele();
-        $this->fraisModel = new FraisBaremesModele(); 
-        $this->compteModel = new ComptesModele();
-        $this->prefixeModel = new PrefixesModele();
     }
 
     public function index()
@@ -119,4 +112,5 @@ class TransactionController extends BaseController
     }
 
 }
+
 }

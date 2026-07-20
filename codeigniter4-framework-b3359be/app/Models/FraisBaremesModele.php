@@ -58,4 +58,22 @@ class FraisBaremesModele extends Model
                     ->where('max_montant >=', $montant)
                     ->first();
     }
+
+    public function commissionTransfert($montant)
+    {
+        $bareme = $this->where('operation_type_id', 3)
+                       ->where('min_montant <=', $montant)
+                       ->where('max_montant >=', $montant)
+                       ->first();
+
+        if ($bareme) {
+            return $bareme['frais'] + ($bareme['frais'] * 0.05); // Ajoute 5% de commission
+        }
+
+        return null; // Aucun barème trouvé pour ce montant
+    }
+
+    
+
+
 }
