@@ -14,20 +14,19 @@
   - [ ] Filtrages Prefixes
 
 > Pages d'operation (depots,retraits,transfert)  (Operateur/Operation) : 
-- [ ] Modele : 
-  - [ ] Fonctions :
-    - [ ] 
+- [x] Modele : 
+  - [x] Fonctions :
+    - [x] FraisBaremesModele : getByOperationType
+    - [x] PrefixesModele : getActifs
 
-- [ ] Controllers : 
-  - [ ] OperationControllers :
-    - [ ] Fonctions : 
-      - [ ] Page Operation
-      - [ ] ShowFraisDepots
-      - [ ] ShowFraisRetraits 
-      - [ ] ShowFraisTransfert 
-      - [ ] CRUD 
+- [x] Controllers : 
+  - [x] OperationControllers :
+    - [x] Fonctions : 
+      - [x] index
+      - [x] show
+      - [x] CRUD 
   
-- [ ] CRUD pour les types d'opérations et barèmes de frais : 
+- [ ] CRUD pour les types d'opérations et barèmes de frais (Operateur/config.php) : 
   - [ ]  Tableau Frais de depots
     - [ ] CRUD   
   - [ ]  Tableau Frais de retraits 

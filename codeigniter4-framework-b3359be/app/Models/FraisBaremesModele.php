@@ -43,4 +43,11 @@ class FraisBaremesModele extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function getByOperationType($typeId)
+    {
+        return $this->where('operation_type_id', $typeId)
+                    ->orderBy('min_montant', 'ASC')
+                    ->findAll();
+    }
 }

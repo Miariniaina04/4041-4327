@@ -65,4 +65,9 @@ class PrefixesModele extends Model
         }
         return null;
     }
+
+    public function getActifs()
+    {
+        return $this->where('actif', 1)->findAll();
+    }
 }
