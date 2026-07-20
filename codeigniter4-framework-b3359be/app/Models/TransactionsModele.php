@@ -43,4 +43,38 @@ class TransactionsModele extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function getTransactionsByPrefix($prefix)
+    {
+        return $this->where('prefix', $prefix)
+                    ->orderBy('created_at', 'DESC')
+                    ->findAll();
+    }
+
+    public function getTransactionsByDateRange($startDate, $endDate)
+    {
+        return $this->where('created_at >=', $startDate)
+                    ->where('created_at <=', $endDate)
+                    ->orderBy('created_at', 'DESC')
+                    ->findAll();
+    }
+
+    public function getTransactionsByMontantRange($minMontant, $maxMontant)
+    {
+        return $this->where('montant >=', $minMontant)
+                    ->where('montant <=', $maxMontant)
+                    ->orderBy('created_at', 'DESC')
+                    ->findAll();
+    }
+
+    public function countTransactionByType($typeId)
+    {
+        return $this->where('operation_type_id', $typeId)
+                    ->countAllResults();
+    }
+
+    public function saveTransaction($data)
+    {
+        return $this->insert($data);
+    }
 }

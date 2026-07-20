@@ -88,4 +88,13 @@ class ComptesModele extends Model
         return $this->where('telephone', $telephone)->countAllResults() > 0;
     }
 
+    public function getSoldeFrais($telephone, $frais)
+    {
+        $compte = $this->where('telephone', $telephone)->first();
+        if ($compte) {
+            return (float)$compte['solde'] - (float)$frais;
+        }
+        return null; // Compte non trouvé
+    }
+
 }
