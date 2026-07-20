@@ -36,9 +36,9 @@
     <main class="container py-4" style="max-width: 900px;">
         
 
-        <div class="row g-4">
+        <div class="row mb-4">
             <!-- Carte du Solde (Effet sculpté) -->
-            <div class="col-md-6">
+            <div class="col">
                 <div class="card h-100 border-0 p-3" style="box-shadow: var(--bs-box-shadow);">
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div>
@@ -56,25 +56,16 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Carte d'Actions Rapides -->
-            <div class="col-md-6">
-                <div class="card h-100 border-0 p-3" style="box-shadow: var(--bs-box-shadow);">
-                    <div class="card-body d-flex flex-column justify-content-between">
-                        <div>
-                            <h6 class="text-uppercase text-muted fw-bold small mb-3">Opérations</h6>
-                            <p class="card-text text-secondary small">Gérez vos transactions, transferts et dépôts en toute simplicité.</p>
-                        </div>
-                        <div class="d-grid mt-4">
-                            <a href="<?= base_url('/client/operation') ?>" class="btn btn-primary py-2 fw-semibold">
-                                <i class="bi bi-wallet2 me-2"></i>Effectuer une opération
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        
         </div>
 
+        <div class="row g-4">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <a type="button" class="btn btn-secondary" href="<?= base_url('/client/operation?type=depot') ?>">Dépôt</a>
+                <a type="button" class="btn btn-secondary" href="<?= base_url('/client/operation?type=retrait') ?>">Retrait</a>
+                <a type="button" class="btn btn-secondary" href="<?= base_url('/client/operation?type=transfert') ?>">Transfert</a>
+            </div>
+        </div>
     </main>
 
 </body>
