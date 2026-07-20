@@ -13,7 +13,20 @@
   - [ ] Supprimer Prefixes 
   - [ ] Filtrages Prefixes
 
-> Pages d'operation (depots,retraits,transfert)  (auth/Operation) : 
+> Pages d'operation (depots,retraits,transfert)  (Operateur/Operation) : 
+- [ ] Modele : 
+  - [ ] Fonctions :
+    - [ ] 
+
+- [ ] Controllers : 
+  - [ ] OperationControllers :
+    - [ ] Fonctions : 
+      - [ ] Page Operation
+      - [ ] ShowFraisDepots
+      - [ ] ShowFraisRetraits 
+      - [ ] ShowFraisTransfert 
+      - [ ] CRUD 
+  
 - [ ] CRUD pour les types d'opérations et barèmes de frais : 
   - [ ]  Tableau Frais de depots
     - [ ] CRUD   
