@@ -11,5 +11,6 @@ class DatabaseSeeder extends Seeder
         $this->call('PrefixSeeder');
         $this->call('OperationTypeSeeder');
         $this->call('CompteSeeder');
+        $this->call('FraisBaremeSeeder');
     }
 }

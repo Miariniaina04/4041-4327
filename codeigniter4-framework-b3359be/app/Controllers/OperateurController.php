@@ -2,8 +2,8 @@
 
 namespace App\Controllers;
 
-use App\Models\PrefixeModel;
-use App\Models\FraisBaremeModel;
+use App\Models\PrefixesModele;
+use App\Models\FraisBaremesModele;
 
 class OperateurController extends BaseController
 {
@@ -12,8 +12,8 @@ class OperateurController extends BaseController
 
     public function __construct()
     {
-        $this->prefixeModel = new PrefixeModel();
-        $this->fraisModel = new FraisBaremeModel();
+        $this->prefixeModel = new PrefixesModele();
+        $this->fraisModel = new FraisBaremesModele();
     }
 
     public function index()
@@ -23,7 +23,7 @@ class OperateurController extends BaseController
             'baremes'  => $this->fraisModel->findAll()
         ];
 
-        return view('operateur/index', $data);
+        return view('Operateur/index', $data);
     }
 
     public function show($id)
@@ -33,12 +33,12 @@ class OperateurController extends BaseController
             'baremes' => $this->fraisModel->getByOperationType($id) 
         ];
 
-        return view('operateur/show', $data);
+        return view('Operateur/index', $data);
     }
 
     public function createPrefixe()
     {
-        return view('operateur/create_prefixe');
+        return view('Operateur/create');
     }
 
     public function storePrefixe()
@@ -58,7 +58,7 @@ class OperateurController extends BaseController
             'bareme' => $this->fraisModel->find($id)
         ];
 
-        return view('operateur/edit_bareme', $data);
+        return view('Operateur/edit', $data);
     }
 
     public function updateBareme($id)

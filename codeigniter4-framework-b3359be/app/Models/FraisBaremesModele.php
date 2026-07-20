@@ -12,7 +12,7 @@ class FraisBaremesModele extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['operation_type_id', 'min_montant', 'max_montant', 'frais'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
