@@ -44,5 +44,48 @@ class ComptesModele extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
     
+    public function getSolde($telephone)
+    {
+        $compte = $this->where('telephone', $telephone)->first();
+        return $compte ? (float)$compte['solde'] : 0.0;
+    }
+
+    public function getCompteByTelephone($telephone)
+    {
+        return $this->where('telephone', $telephone)
+                    ->first();
+    }
     
+    // mettre a jours
+    public function updateSolde($compteId, $nouveauSolde)
+    {
+        return $this->update($compteId, ['solde' => $nouveauSolde]);
+    }
+
+    // retirer ou ajouter dans le solde
+    public function ajusterSolde($compteId, $montant, $estAjout = true)
+    {
+        $compte = $this->find($compteId);
+        
+        if (!$compte) {
+            return false;
+        }
+
+        $nouveauSolde = $estAjout 
+            ? $compte['solde'] + $montant 
+            : $compte['solde'] - $montant;
+
+        // Éviter solde négatif
+        if (!$estAjout && $nouveauSolde < 0) {
+            return false;
+        }
+
+        return $this->update($compteId, ['solde' => $nouveauSolde]);
+    }
+
+    public function existe($telephone)
+    {
+        return $this->where('telephone', $telephone)->countAllResults() > 0;
+    }
+
 }

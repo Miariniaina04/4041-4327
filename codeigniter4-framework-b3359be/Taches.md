@@ -62,10 +62,10 @@
   - [x] TransactionsModele
 
 - [ ] Interface de login automatique client (numéro de téléphone)  (home/Login):
-  - [ ] Fonction verification_user 
+  - [x] Fonction login() 
   - [ ] Message d'auth 
-  - [ ] Page Login 
-  - [ ] Création automatique de compte si inexistant
+  - [x] Page Login 
+  - [x] Création automatique de compte si inexistant
 - [ ] Opérations client :
   - [ ] Voir solde
   - [ ] Dépôt (simulation)

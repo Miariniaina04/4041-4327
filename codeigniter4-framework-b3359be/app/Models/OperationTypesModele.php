@@ -43,4 +43,8 @@ class OperationTypesModele extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function getTypeById($operationId){
+        return $this->where('id',$operationId)->findAll();
+    }
 }
