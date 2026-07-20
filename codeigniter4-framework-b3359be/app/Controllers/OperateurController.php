@@ -5,18 +5,22 @@ namespace App\Controllers;
 use App\Models\PrefixesModele;
 use App\Models\FraisBaremesModele;
 use App\Models\TransactionsModele;
+use App\Models\ComptesModele;
+
 
 class OperateurController extends BaseController
 {
     protected $prefixeModel;
     protected $fraisModel;
     protected $transactionModel;
+    protected $compteModel;
 
     public function __construct()
     {
         $this->prefixeModel = new PrefixesModele();
         $this->fraisModel = new FraisBaremesModele();
         $this->transactionModel = new TransactionsModele();
+        $this->compteModel= new ComptesModele();
     }
 
     public function index()
@@ -119,7 +123,7 @@ class OperateurController extends BaseController
 
     public function tableauGains()
     {
-        $gainsData = $this->TransactionModel->getGainsParType();
+        $gainsData = $this->transactionModel->getGainsParType();
 
         $nomOperations = [
             1 => 'Dépôt',
@@ -142,14 +146,13 @@ class OperateurController extends BaseController
 
     public function listeClients()
     {
-        $data['clients'] = $this->comptesModel->orderBy('id', 'ASC')->findAll();
+        $data['clients'] = $this->compteModel->orderBy('id', 'ASC')->findAll();
         return view('Operateur/liste_clients', $data);
     }
     
     public function showClientTransactions($clientId)
     {
-        $comptesModel = new \App\Models\ComptesModele();
-        $client = $comptesModel->find($clientId);
+        $client = $this->compteModel->find($clientId);
         if (!$client) {
             return redirect()->back()->with('error', 'Client introuvable.');
         }

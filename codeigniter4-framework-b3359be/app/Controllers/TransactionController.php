@@ -4,15 +4,23 @@ namespace App\Controllers;
 
 use App\Models\TransactionsModele;
 use App\Models\ComptesModele;
+use App\Models\FraisBaremesModele;
+use App\Models\PrefixesModele;
+
 
 class TransactionController extends BaseController
 { 
     protected $transaction;
     protected $fraisModel;
+    protected $compteModel;
+    protected $prefixeModel;
 
     public function __construct()
     {
         $this->transaction = new TransactionsModele();
+        $this->fraisModel = new FraisBaremesModele(); 
+        $this->compteModel = new ComptesModele();
+        $this->prefixeModel = new PrefixesModele();
     }
 
     public function index()
@@ -31,7 +39,7 @@ class TransactionController extends BaseController
     public function save()
     {
         $sessionPhone = session()->get('user_phone') ?: "0337208662"; 
-        $compte = $this->comptesModel->getCompteByTelephone($sessionPhone);
+        $compte = $this->compteModel->getCompteByTelephone($sessionPhone);
 
         if (!$compte) {
             return redirect()->back()->with('error', 'Compte expéditeur introuvable.');
@@ -45,7 +53,7 @@ class TransactionController extends BaseController
         $idDestinataire = null;
         if ($typeId == 3) {
             $telephoneDest = $this->request->getPost('telephone_destination');
-            $idDestinataire = $this->comptesModel->conversionTelephoneToId($telephoneDest);
+            $idDestinataire = $this->compteModel->conversionTelephoneToId($telephoneDest);
             
             if (!$idDestinataire) {
                 return redirect()->back()->with('error', 'Le numéro de téléphone du destinataire est invalide.');
@@ -74,12 +82,12 @@ class TransactionController extends BaseController
             
             // Créditer le destinataire si c'est un transfert
             if ($typeId == 3) {
-                $compteDest = $this->comptesModel->find($idDestinataire);
-                $this->comptesModel->updateSolde($idDestinataire, $compteDest['solde'] + $montant);
+                $compteDest = $this->compteModel->find($idDestinataire);
+                $this->compteModel->updateSolde($idDestinataire, $compteDest['solde'] + $montant);
             }
         }
 
-        $this->comptesModel->updateSolde($compteId, $nouveauSolde);
+        $this->compteModel->updateSolde($compteId, $nouveauSolde);
 
         // Enregistrement final avec la liaison correcte
         $transactionData = [
@@ -92,7 +100,7 @@ class TransactionController extends BaseController
             'statut'            => 'succes'
         ];
 
-        if ($this->transactionModel->insert($transactionData)) {
+        if ($this->transaction->insert($transactionData)) {
             return redirect()->to('/transaction')->with('success', 'Opération validée et enregistrée !');
         } else {
             return redirect()->back()->with('error', 'Une erreur est survenue lors de l\'enregistrement.');
@@ -104,7 +112,7 @@ class TransactionController extends BaseController
     
     helper('phone');
     $numeroDestinataire = $this->request->getPost('compte_destination');
-    $operateurDetecte = $this->prefixesModel->ckeckOperateur($numeroDestinataire);
+    $operateurDetecte = $this->prefixeModel->ckeckOperateur($numeroDestinataire);
 
     if ($operateurDetecte === null) {
         return redirect()->back()->with('error', 'Numéro de téléphone du destinataire invalide ou préfixe non reconnu.');

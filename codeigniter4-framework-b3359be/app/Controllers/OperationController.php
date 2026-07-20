@@ -16,6 +16,7 @@ class OperationController extends BaseController
     {
         $this->prefixeModel = new PrefixesModele();
         $this->fraisModel = new FraisBaremesModele();
+        $this->comptesModel = new ComptesModele();
     }
 
     public function index()
@@ -57,28 +58,45 @@ class OperationController extends BaseController
 
 
     public function obtenirCalculFraisAjax()
-{
-    $typeId = $this->request->getGet('type_id');
-    $montant = $this->request->getGet('montant');
-
-        if (empty($typeId) || empty($montant)) {
-            return $this->response->setJSON(['status' => 'error', 'message' => 'Données manquantes']);
+    {
+        // Vérification que c'est bien une requête AJAX
+        if (!$this->request->isAJAX()) {
+            return $this->response->setJSON([
+                'status'  => 'error',
+                'message' => 'Requête non autorisée'
+            ]);
         }
 
-        $montantTotal = $this->calcul_montant_frais($typeId, $montant);
+        $typeId   = $this->request->getGet('type_id');
+        $montant  = (float) $this->request->getGet('montant');
 
-        if ($montantTotal === null) {
-            return $this->response->setJSON(['status' => 'error', 'message' => 'Montant en dehors des tranches disponibles.']);
+        if (empty($typeId) || $montant <= 0) {
+            return $this->response->setJSON([
+                'status'  => 'error',
+                'message' => 'Données manquantes ou montant invalide'
+            ]);
         }
 
-    // On récupère aussi juste la valeur des frais pour l'afficher
-    $bareme = $this->fraisModel->getFraisByMontant($typeId, $montant);
+        // Appel de ta méthode de calcul
+        $resultat = $this->calcul_montant_frais($typeId, $montant);
 
-    return $this->response->setJSON([
-        'status' => 'success',
-        'frais' => $bareme['frais'],
-        'total' => $montantTotal
-    ]);
-}
+        if ($resultat === null) {
+            return $this->response->setJSON([
+                'status'  => 'error',
+                'message' => 'Montant en dehors des tranches disponibles.'
+            ]);
+        }
+
+        // Récupération du barème pour avoir le montant des frais
+        $bareme = $this->fraisModel->getFraisByMontant($typeId, $montant);
+
+        $frais = $bareme ? (float)$bareme['frais'] : 0;
+
+        return $this->response->setJSON([
+            'status' => 'success',
+            'frais'  => $frais,
+            'total'  => $resultat   // montantTotal retourné par ta fonction
+        ]);
+    }
 
 }

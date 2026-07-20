@@ -12,7 +12,7 @@ class TransactionsModele extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['compte_id_from','compte_id_to','operation_type_id', 'montant', 'frais', 'montant_total', 'date_transaction', 'statut'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

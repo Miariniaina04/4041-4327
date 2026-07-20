@@ -28,7 +28,7 @@
                 <p class="text-muted small mb-4">Effectuez vos transactions en toute sécurité.</p>
 
                 <!-- Formulaire de transfert -->
-                <form action="<?= base_url('transaction/effectuer'); ?>" method="post">
+                <form action="<?= base_url('/client/transaction/effectuer'); ?>" method="post">
                     
                     <h2 class="h5 fw-bold text-primary mb-4">
                         <i class="bi bi-arrow-left-right me-2"></i>Effectuer un Transfert
@@ -129,7 +129,11 @@
             }
 
             // Appel AJAX vers ton contrôleur (sans le compte_id puisqu'il est en session !)
-            fetch(`<?php echo base_url('operation/calcul-frais-ajax'); ?>?type_id=${typeId}&montant=${montant}`)
+            fetch(`<?php echo base_url('/client/operation/calcul-frais-ajax'); ?>?type_id=${typeId}&montant=${montant}`, {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    })
                 .then(response => response.json())
                 .then(data => {
                     if (data.status === 'success') {
