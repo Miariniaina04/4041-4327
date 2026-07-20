@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS prefixes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     prefix VARCHAR(4) NOT NULL UNIQUE,
     actif BOOLEAN DEFAULT 1,
+    operateur_principal BOOLEAN DEFAULT 0,
     description TEXT
 );
 
@@ -53,12 +54,21 @@ CREATE TABLE IF NOT EXISTS transactions (
     FOREIGN KEY (operation_type_id) REFERENCES operation_types(id)
 );
 
+-- commission_inter
+CREATE TABLE IF NOT EXISTS commissions_inter (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    prefix_source_id INTEGER,
+    prefix_dest_id INTEGER,
+    commission_pourcentage DECIMAL(5,2) DEFAULT 0.0,  -- ex: 1.5 %
+    FOREIGN KEY (prefix_source_id) REFERENCES prefixes(id),
+    FOREIGN KEY (prefix_dest_id) REFERENCES prefixes(id)
+);
 -- Insertion des données de base
 --- prefixes test
-INSERT OR IGNORE INTO prefixes (prefix, description) VALUES 
-('033', 'Prefix principal'),
-('037', 'Prefix secondaire');
-
+INSERT OR IGNORE INTO prefixes (prefix, description, operateur_principal) VALUES 
+('033', 'Airtel', 1),
+('037', 'Orange', 0),
+('034', 'Telma', 0);
 --- prefixes operation_types test
 INSERT OR IGNORE INTO operation_types (nom, description) VALUES 
 ('depot', 'Dépôt d\'argent'),
@@ -67,3 +77,8 @@ INSERT OR IGNORE INTO operation_types (nom, description) VALUES
 
 INSERT OR IGNORE INTO comptes (telephone, prefix_id) VALUES
 ("0337208662",1);
+
+INSERT OR IGNORE INTO commissions_inter (prefix_source_id,prefix_dest_id) VALUES
+(1, 2, 1.5),
+(1, 3, 2.0),
+(2, 3, 1.0);

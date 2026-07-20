@@ -11,17 +11,17 @@ class PrefixSeeder extends Seeder
         $data = [
             [
                 'prefix' => '033',
-                'description' => 'Prefix principal',
+                'description' => 'Airtel',
                 'operateur_principal' => true,
             ],
             [
                 'prefix' => '037',
-                'description' => 'Prefix secondaire',
+                'description' => 'Orange',
                 'operateur_principal' => false,
             ],
             [
                 'prefix' => '034',
-                'description' => 'Prefix teritaire',
+                'description' => 'Telma',
                 'operateur_principal' => false,
             ],
         ];
