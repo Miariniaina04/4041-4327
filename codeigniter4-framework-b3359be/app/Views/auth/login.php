@@ -28,30 +28,22 @@
       <div class="auth-logo">Fit<span>Space</span></div>
       <p class="auth-subtitle">Content de vous revoir !</p>
 
-<form id="loginForm" data-url="<?= base_url('/login') ?>" method="post">
-  <?= csrf_field() ?> 
+    <form id="loginForm" data-url="<?= base_url('/login') ?>" method="post">
+      <?= csrf_field() ?> 
 
-  <div id="js-error-message" class="flash-message flash-error" style="display:none; margin-bottom:15px;">
-     <i class="bi bi-exclamation-circle-fill"></i>
-     <span class="msg-content"></span>
-  </div>
-
-  <div class="form-group mb-3">
-    <label class="form-label">Adresse email</label>
-    <input type="email" name="email" class="form-control" placeholder="exemple@gmail.com" />
-  </div>
-
-  <div class="form-group mb-4">
-    <label class="form-label">Mot de passe</label>
-    <input type="password" name="mdp" class="form-control" placeholder="******" />
-  </div>
-
-  <button type="submit" class="btn-primary-custom">Se connecter</button>
-</form>
-
-      <div class="auth-footer mt-4 text-center">
-        Pas encore de compte ? <a href="<?= base_url('/inscription') ?>">S'inscrire</a>
+      <div id="js-error-message" class="flash-message flash-error" style="display:none; margin-bottom:15px;">
+        <i class="bi bi-exclamation-circle-fill"></i>
+        <span class="msg-content"></span>
       </div>
+
+      <div class="form-group mb-3">
+        <label class="form-label">Adresse email</label>
+        <input type="email" name="email" class="form-control" placeholder="exemple@gmail.com" />
+      </div>
+
+      <button type="submit" class="btn-primary-custom">Se connecter</button>
+    </form>
+
 
     </div>
   </div>
