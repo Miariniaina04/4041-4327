@@ -50,4 +50,12 @@ class FraisBaremesModele extends Model
                     ->orderBy('min_montant', 'ASC')
                     ->findAll();
     }
+
+    public function getFraisByMontant($typeId, $montant)
+    {
+        return $this->where('operation_type_id', $typeId)
+                    ->where('min_montant <=', $montant)
+                    ->where('max_montant >=', $montant)
+                    ->first();
+    }
 }
