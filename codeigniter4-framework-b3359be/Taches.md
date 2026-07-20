@@ -81,7 +81,7 @@
 - [ ] Tests fonctionnels complets
 - [ ] Mise à jour de `base.sql` avec données de test
 - [ ] Documentation dans README.md (instructions d'installation)
-- [ ] Commit + Tag `v1`
+- [x] Commit + Tag `v1`
 
 ## Version 2 (v2)
 
@@ -107,6 +107,6 @@
 - [ ] Mise à jour des contrôleurs pour les nouvelles fonctionnalités
 - [ ] Tests des transferts inter-opérateurs et envoi multiple
 - [ ] Mise à jour du tableau de bord opérateur
-- [ ] Commit + création du Tag `v2`
+- [x] Commit + création du Tag `v2`
 
 **Statut Version 2 :** En cours 

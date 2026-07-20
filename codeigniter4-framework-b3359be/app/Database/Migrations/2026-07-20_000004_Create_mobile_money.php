@@ -13,6 +13,7 @@ class CreateMobileMoney extends Migration
             'prefix' => ['type' => 'VARCHAR', 'constraint' => 4, 'null' => false],
             'actif' => ['type' => 'BOOLEAN', 'default' => 1],
             'description' => ['type' => 'TEXT', 'null' => true],
+            'operateur_principal' => ['type' => 'BOOLEAN', 'default' => false],
         ]);
         $this->forge->addKey('id', true);
         $this->forge->addUniqueKey('prefix');
@@ -66,12 +67,25 @@ class CreateMobileMoney extends Migration
         $this->forge->addForeignKey('compte_id_to', 'comptes', 'id', 'SET NULL', 'CASCADE');
         $this->forge->addForeignKey('operation_type_id', 'operation_types', 'id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('transactions');
+
+        $this->forge->addField([
+            'id' => [ 'type' => 'INTEGER', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
+            'prefix_source_id' => ['type' => 'INTEGER', 'constraint' => 11, 'unsigned'   => true],
+            'prefix_dest_id' => [ 'type'       => 'INTEGER', 'constraint' => 11, 'unsigned'   => true],
+            'commission_pourcentage' => [ 'type' => 'DECIMAL', 'constraint' => '5,2','default' => 0.00],
+            'date_cree' => [ 'type' => 'DATETIME', 'default' => 'CURRENT_TIMESTAMP'],
+        ]);
+        $this->forge->addKey('id', true);
+        $this->forge->addForeignKey('prefix_source_id', 'prefixes', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('prefix_dest_id', 'prefixes', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->createTable('commissions_inter');
     }
 
     public function down()
     {
         $this->forge->dropTable('transactions', true);
         $this->forge->dropTable('frais_baremes', true);
+        $this->forge->dropTable('commissions_inter', true);
         $this->forge->dropTable('comptes', true);
         $this->forge->dropTable('operation_types', true);
         $this->forge->dropTable('prefixes', true);

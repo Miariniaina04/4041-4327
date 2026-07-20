@@ -1,33 +1,4 @@
-<?php
-
-namespace App\Controllers;
-
-use App\Models\TransactionsModele;
-use App\Models\ComptesModele;
-
-class TransactionController extends BaseController
-{ 
-    protected $transaction;
-    protected $fraisModel;
-
-    public function __construct()
-    {
-        $this->transaction = new TransactionsModele();
-    }
-
-    public function index()
-    {
-        $transactions = $this->transaction->findAll();
-        return view('transaction/index', ['transactions' => $transactions]);
-    }
-
-    public function TableauGainByIdAJAX($id)
-    {
-        $transactions = $this->transaction->countTransactionByType($id);
-        return $this->response->setJSON($transactions);
-    }
-
-    <?php
+ <?php
 
 namespace App\Controllers;
 

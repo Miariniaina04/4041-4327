@@ -14,6 +14,7 @@ $routes->get('/logout', 'ClientController::logout');
 
 $routes->get('/client/operation', 'OperationController::index'); 
 $routes->get('/client/operation/calcul-frais-ajax', 'OperationController::obtenirCalculFraisAjax');
+
 $routes->get('/client/transaction', 'TransactionController::index'); 
 $routes->post('/client/transaction/effectuer', 'TransactionController::save');
 

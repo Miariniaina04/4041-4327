@@ -25,11 +25,11 @@ class OperationController extends BaseController
 
         switch ($type) {
             case 'depot':
-                return view('client/depot', ['type_id' => 1]);
+                return view('client/operation/depot', ['type_id' => 1]);
             case 'retrait':
-                return view('client/retrait', ['type_id' => 2]);
+                return view('client/operation/retrait', ['type_id' => 2]);
             case 'transfert':
-                return view('client/transfert', ['type_id' => 3]);
+                return view('client/operation/transfert', ['type_id' => 3]);
             default:
                 return redirect()->to('/client/dashboard')->with('error', 'Type d\'opération invalide.');
         }

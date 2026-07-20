@@ -12,10 +12,17 @@ class PrefixSeeder extends Seeder
             [
                 'prefix' => '033',
                 'description' => 'Prefix principal',
+                'operateur_principal' => true,
             ],
             [
                 'prefix' => '037',
                 'description' => 'Prefix secondaire',
+                'operateur_principal' => false,
+            ],
+            [
+                'prefix' => '034',
+                'description' => 'Prefix teritaire',
+                'operateur_principal' => false,
             ],
         ];
 
