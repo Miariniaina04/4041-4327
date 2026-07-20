@@ -12,7 +12,7 @@ class PrefixesModele extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields = ['prefix', 'description', 'actif'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

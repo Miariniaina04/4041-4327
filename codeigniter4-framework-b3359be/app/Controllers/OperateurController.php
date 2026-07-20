@@ -18,36 +18,48 @@ class OperateurController extends BaseController
 
     public function index()
     {
-        $data = [
-            'prefixes' => $this->prefixeModel->findAll(),
-            'baremes'  => $this->fraisModel->findAll()
-        ];
+        try {
+            $data = [
+                'prefixes' => $this->prefixeModel->findAll(),
+                'baremes'  => $this->fraisModel->findAll()
+            ];
+        } catch (\Throwable $e) {
+            $data = ['prefixes' => [], 'baremes' => [], 'error' => $e->getMessage()];
+        }
 
         return view('Operateur/index', $data);
     }
 
     public function show($id)
     {
-        $data = [
-            'prefixe' => $this->prefixeModel->find($id),
-            'baremes' => $this->fraisModel->getByOperationType($id) 
-        ];
+        try {
+            $data = [
+                'prefixe' => $this->prefixeModel->find($id),
+                'baremes' => $this->fraisModel->getByOperationType($id)
+            ];
+        } catch (\Throwable $e) {
+            $data = ['prefixe' => null, 'baremes' => [], 'error' => $e->getMessage()];
+        }
 
         return view('Operateur/index', $data);
     }
 
     public function createPrefixe()
     {
-        return view('Operateur/create');
+        return view('Operateur/add');
     }
 
     public function storePrefixe()
     {
-        $this->prefixeModel->save([
-            'prefix'      => $this->request->getPost('prefix'),
-            'description' => $this->request->getPost('description'),
-            'actif'       => 1
-        ]);
+        try {
+            $this->prefixeModel->save([
+                'prefix'      => $this->request->getPost('prefix'),
+                'description' => $this->request->getPost('description'),
+                'actif'       => 1
+            ]);
+        } catch (\Throwable $e) {
+            return redirect()->to('/operateur')->with('error', 'Impossible d’ajouter le préfixe : ' . $e->getMessage());
+        }
 
         return redirect()->to('/operateur')->with('success', 'Préfixe ajouté avec succès');
     }
@@ -63,12 +75,16 @@ class OperateurController extends BaseController
 
     public function updateBareme($id)
     {
-        $this->fraisModel->update($id, [
-            'min_montant'       => $this->request->getPost('min_montant'),
-            'max_montant'       => $this->request->getPost('max_montant'),
-            'frais'             => $this->request->getPost('frais'),
-            'operation_type_id' => $this->request->getPost('operation_type_id')
-        ]);
+        try {
+            $this->fraisModel->update($id, [
+                'min_montant'       => $this->request->getPost('min_montant'),
+                'max_montant'       => $this->request->getPost('max_montant'),
+                'frais'             => $this->request->getPost('frais'),
+                'operation_type_id' => $this->request->getPost('operation_type_id')
+            ]);
+        } catch (\Throwable $e) {
+            return redirect()->to('/operateur')->with('error', 'Impossible de mettre à jour le barème : ' . $e->getMessage());
+        }
 
         return redirect()->to('/operateur')->with('success', 'Barème mis à jour');
     }
@@ -76,14 +92,24 @@ class OperateurController extends BaseController
 
     public function desactiverPrefixe($id)
     {
-        $this->prefixeModel->update($id, ['actif' => 0]);
+        try {
+            $this->prefixeModel->update($id, ['actif' => 0]);
+        } catch (\Throwable $e) {
+            return redirect()->to('/operateur')->with('error', 'Impossible de désactiver le préfixe : ' . $e->getMessage());
+        }
+
         return redirect()->to('/operateur');
     }
 
     
     public function deleteBareme($id)
     {
-        $this->fraisModel->delete($id);
+        try {
+            $this->fraisModel->delete($id);
+        } catch (\Throwable $e) {
+            return redirect()->to('/operateur')->with('error', 'Impossible de supprimer le barème : ' . $e->getMessage());
+        }
+
         return redirect()->to('/operateur');
     }
 
