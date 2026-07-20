@@ -13,6 +13,7 @@ class CompteSeeder extends Seeder
                 'telephone' => '0337208662',
                 'prefix_id' => 1,
                 'solde' => 1000000,
+                'date_creation' => date('Y-m-d H:i:s')
             ],
         ];
 

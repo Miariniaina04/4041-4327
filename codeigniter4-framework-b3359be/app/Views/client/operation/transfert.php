@@ -15,7 +15,7 @@
         
         <!-- Lien de retour vers dashboard -->
         <div class="mb-4">
-            <a href="<?php echo base_url('/client/dashboard'); ?>" class="btn btn-sm btn-light border-0" style="box-shadow: var(--bs-box-shadow);">
+            <a href="<?php echo base_url('/client/dashboard'); ?>" class="btn btn-sm btn-primary border-0" style="box-shadow: var(--bs-box-shadow);">
                 <i class="bi bi-arrow-left me-1"></i> Retour au dashboard
             </a>
         </div>

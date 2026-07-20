@@ -35,6 +35,13 @@
     <!-- Contenu Principal -->
     <main class="container py-4" style="max-width: 900px;">
         
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+            <div class="mt-3 mt-md-0">
+                <a href="<?= base_url('/client/transaction') ?>" class="btn btn-primary fw-semibold px-3 py-2">
+                    <i class="bi bi-arrow-left me-1"></i> Voir l'historique
+                </a>
+            </div>
+        </div>
 
         <div class="row mb-4">
             <!-- Carte du Solde (Effet sculpté) -->
@@ -61,9 +68,9 @@
 
         <div class="row g-4">
             <div class="btn-group" role="group" aria-label="Basic example">
-                <a type="button" class="btn btn-secondary" href="<?= base_url('/client/operation?type=depot') ?>">Dépôt</a>
-                <a type="button" class="btn btn-secondary" href="<?= base_url('/client/operation?type=retrait') ?>">Retrait</a>
-                <a type="button" class="btn btn-secondary" href="<?= base_url('/client/operation?type=transfert') ?>">Transfert</a>
+                <a type="button" class="btn btn-primary" href="<?= base_url('/client/operation?type=depot') ?>">Dépôt</a>
+                <a type="button" class="btn btn-primary" href="<?= base_url('/client/operation?type=retrait') ?>">Retrait</a>
+                <a type="button" class="btn btn-primary" href="<?= base_url('/client/operation?type=transfert') ?>">Transfert</a>
             </div>
         </div>
     </main>

@@ -3,7 +3,7 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
-
+use CodeIgniter\Database\RawSql;
 class CreateMobileMoney extends Migration
 {
     public function up()
@@ -24,7 +24,7 @@ class CreateMobileMoney extends Migration
             'telephone' => ['type' => 'VARCHAR', 'constraint' => 20, 'null' => false],
             'solde' => ['type' => 'DECIMAL', 'constraint' => '15,2', 'default' => 0.0],
             'prefix_id' => ['type' => 'INTEGER', 'null' => true],
-            'date_creation' => ['type' => 'DATETIME', 'default' => 'CURRENT_TIMESTAMP'],
+            'date_creation' => ['type' => 'DATETIME', 'default' => new RawSql('CURRENT_TIMESTAMP')],
         ]);
         $this->forge->addKey('id', true);
         $this->forge->addUniqueKey('telephone');
@@ -59,8 +59,8 @@ class CreateMobileMoney extends Migration
             'montant' => ['type' => 'DECIMAL', 'constraint' => '15,2', 'null' => false],
             'frais' => ['type' => 'DECIMAL', 'constraint' => '15,2', 'default' => 0.0],
             'montant_total' => ['type' => 'DECIMAL', 'constraint' => '15,2', 'null' => false],
-            'date_transaction' => ['type' => 'DATETIME', 'default' => 'CURRENT_TIMESTAMP'],
-            'statut' => ['type' => 'VARCHAR', 'constraint' => 20, 'default' => 'succes'],
+            'date_transaction' => ['type' => 'DATETIME', 'default' => new RawSql('CURRENT_TIMESTAMP')],
+            'statut' => ['type' => 'VARCHAR', 'constraint' => 20, 'default' => 'success'],
         ]);
         $this->forge->addKey('id', true);
         $this->forge->addForeignKey('compte_id_from', 'comptes', 'id', 'SET NULL', 'CASCADE');
@@ -73,7 +73,7 @@ class CreateMobileMoney extends Migration
             'prefix_source_id' => ['type' => 'INTEGER', 'constraint' => 11, 'unsigned'   => true],
             'prefix_dest_id' => [ 'type'       => 'INTEGER', 'constraint' => 11, 'unsigned'   => true],
             'commission_pourcentage' => [ 'type' => 'DECIMAL', 'constraint' => '5,2','default' => 0.00],
-            'date_cree' => [ 'type' => 'DATETIME', 'default' => 'CURRENT_TIMESTAMP'],
+            'date_cree' => [ 'type' => 'DATETIME', 'default' => new RawSql('CURRENT_TIMESTAMP')],
         ]);
         $this->forge->addKey('id', true);
         $this->forge->addForeignKey('prefix_source_id', 'prefixes', 'id', 'CASCADE', 'CASCADE');

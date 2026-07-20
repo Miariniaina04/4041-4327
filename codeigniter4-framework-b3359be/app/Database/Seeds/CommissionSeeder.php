@@ -9,9 +9,9 @@ class CommissionSeeder extends Seeder
     public function run()
     {
         $commissions = [
-            ['prefix_source_id' => 1, 'prefix_dest_id' => 2, 'commission_pourcentage' => 1.5], // 033 → 032
-            ['prefix_source_id' => 1, 'prefix_dest_id' => 3, 'commission_pourcentage' => 2.0], // 033 → 031
-            ['prefix_source_id' => 2, 'prefix_dest_id' => 3, 'commission_pourcentage' => 1.0], // 037 → 032
+            ['prefix_source_id' => 1, 'prefix_dest_id' => 2, 'commission_pourcentage' => 1.5, 'date_cree' => date('Y-m-d H:i:s')], // 033 → 032
+            ['prefix_source_id' => 1, 'prefix_dest_id' => 3, 'commission_pourcentage' => 2.0, 'date_cree' => date('Y-m-d H:i:s')], // 033 → 031
+            ['prefix_source_id' => 2, 'prefix_dest_id' => 3, 'commission_pourcentage' => 1.0, 'date_cree' => date('Y-m-d H:i:s')], // 037 → 032
         ];
 
         foreach ($commissions as $com) {

@@ -68,8 +68,5 @@ class ClientController extends BaseController
         return view('client/dashboard', $data); 
     }
 
-    public function formOperation(){
-        return view('client/formOperation');
-    }
 
 }

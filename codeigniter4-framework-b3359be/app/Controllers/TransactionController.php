@@ -18,8 +18,22 @@ class TransactionController extends BaseController
 
     public function index()
     {
-        $transactions = $this->transaction->findAll();
-        return view('transaction/index', ['transactions' => $transactions]);
+        $sessionPhone = session()->get('user_phone') ?: "0337208662"; 
+        $compte = $this->compteModel->getCompteByTelephone($sessionPhone);
+
+        if (!$compte) {
+            return redirect()->to('/client/dashboard')->with('error', 'Compte introuvable');
+        }
+
+        $transactions = $this->transaction
+                    ->where('compte_id_from', $compte['id'])
+                    ->orWhere('compte_id_to', $compte['id'])
+                    ->orderBy('date_transaction', 'DESC')
+                    ->findAll();
+        return view('client/historique', [
+            'compte'       => $compte,
+            'transactions' => $transactions
+        ]);
     }
 
     public function TableauGainByIdAJAX($id)
@@ -94,22 +108,22 @@ class TransactionController extends BaseController
         ];
 
         if ($this->transaction->insert($transactionData)) {
-            return redirect()->to('/transaction')->with('success', 'Opération validée et enregistrée !');
+            return redirect()->to('/client/transaction')->with('success', 'Opération validée et enregistrée !');
         } else {
             return redirect()->back()->with('error', 'Une erreur est survenue lors de l\'enregistrement.');
         }
     }
 
     public function validerTransfert()
-{
-    
-    helper('phone');
-    $numeroDestinataire = $this->request->getPost('compte_destination');
-    $operateurDetecte = $this->prefixeModel->ckeckOperateur($numeroDestinataire);
+    {
+        
+        helper('phone');
+        $numeroDestinataire = $this->request->getPost('compte_destination');
+        $operateurDetecte = $this->prefixeModel->ckeckOperateur($numeroDestinataire);
 
-    if ($operateurDetecte === null) {
-        return redirect()->back()->with('error', 'Numéro de téléphone du destinataire invalide ou préfixe non reconnu.');
-    }
+        if ($operateurDetecte === null) {
+            return redirect()->back()->with('error', 'Numéro de téléphone du destinataire invalide ou préfixe non reconnu.');
+        }
 
 }
 
