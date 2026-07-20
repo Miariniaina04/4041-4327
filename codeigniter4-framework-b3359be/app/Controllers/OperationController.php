@@ -20,12 +20,19 @@ class OperationController extends BaseController
 
     public function index()
     {
-        $data = [
-            'prefixes' => $this->prefixeModel->findAll(),
-            'baremes'  => $this->fraisModel->findAll()
-        ];
+        // Détecte le type d'opération demandé dans l'URL (ex: /client/operation?type=depot)
+        $type = $this->request->getGet('type');
 
-        return view('client/formulaire', $data);
+        switch ($type) {
+            case 'depot':
+                return view('client/depot', ['type_id' => 1]);
+            case 'retrait':
+                return view('client/retrait', ['type_id' => 2]);
+            case 'transfert':
+                return view('client/transfert', ['type_id' => 3]);
+            default:
+                return redirect()->to('/client/dashboard')->with('error', 'Type d\'opération invalide.');
+        }
     }
 
 
@@ -47,6 +54,7 @@ class OperationController extends BaseController
             } 
             return $montant + $bareme['frais'];
     }
+
 
     public function obtenirCalculFraisAjax()
 {

@@ -97,4 +97,11 @@ class ComptesModele extends Model
         return null;
     }
 
+    public function conversionTelephoneToId($telephone)
+    { 
+        $compte = $this->where('telephone', $telephone)->first();
+        return $compte ? $compte['id'] : null;
+    }
+
+
 }

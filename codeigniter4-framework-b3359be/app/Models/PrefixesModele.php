@@ -70,4 +70,11 @@ class PrefixesModele extends Model
     {
         return $this->where('actif', 1)->findAll();
     }
+
+    public function conversionTelephoneToPrefixe($telephone)
+    {
+        $prefixe = substr($telephone, 0, 3);
+        return $this->prefixeModel->where('prefix', $prefixe)->first();
+    }
+
 }
