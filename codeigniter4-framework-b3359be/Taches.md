@@ -1,19 +1,53 @@
 # Tâches - Projet Mobile Money
 
 **Binôme :** [Vos Noms Ici]  
-**Version 1** - Date de livraison : 
 
 ## Version 1 (v1)
 
 ### Étudiant 1 : [Nom]
-- [ ]  Creation de Github de notre projet
+
+> Page de Configuration Prefixes (auth/Config): 
+- [ ] CRUD pour les préfixes (côté opérateur)
+  - [ ] Ajouter Prefixes 
+  - [ ] Modifier Prefixes 
+  - [ ] Supprimer Prefixes 
+  - [ ] Filtrages Prefixes
+
+> Pages d'operation (depots,retraits,transfert)  (auth/Operation) : 
+- [ ] CRUD pour les types d'opérations et barèmes de frais : 
+  - [ ]  Tableau Frais de depots
+    - [ ] CRUD   
+  - [ ]  Tableau Frais de retraits 
+    - [ ] CRUD  
+  - [ ]  Tableau Frais de Transferts
+    - [ ] CRUD  
+  
+- [ ] Calcul automatique des frais selon les tranches de montant : 
+  - [ ] Fonctions :
+    - [ ] calcul_Depot : Numero 1 -> Numero 1 (Aucun Frais)
+    - [ ] calcul_Retrait : Numero 1 <- Numero 1 (Avec Frais) 
+    - [ ] calcul_Transfert : Numero 1 -> Numero 2 (Avec Frais)
+    - [ ] calcul_Retrait_Transfert : Numero 1 <=> Numero 2 (Avec Frais)
+  
+- [ ] Tableau de bord opérateur (gains, situation des comptes clients)  (auth/Gain) :
+  - [ ]  Tableau de Bord Gains pour chaque types (Tansfert et Retrait)
+  - [ ]  Situation Clients
+
+### Étudiant 2 : [Nom]
+
+- [x]  Creation de Github de notre projet
+
+- [x] Configuration Sqlite et Codeigniter 3
+  - [x] Database.php (Configuration sqlite)
 
 - [ ] Création de la base de données (`base.sql`) : tables `prefixes`, `operation_types`, `frais_barèmes`, `comptes`, `transactions`
-  - [ ] Creation du `prefixes`
-  - [ ] Creation du  `operation_types`
-  - [ ] Creation du `frais_barèmes`
-  - [ ] Creation du `comptes`
-  - [ ] Creation du `transactions`
+  - [x] Creation du `prefixes`
+  - [x] Creation du  `operation_types`
+  - [x] Creation du `frais_barèmes`
+  - [x] Creation du `comptes`
+  - [x] Creation du `transactions`
+  
+- [ ] Insertion dans sqlite3 
 
 - [ ] Mise en place des modèles (Models) pour toutes les entités
   - [ ] PrefixesModele
@@ -22,22 +56,11 @@
   - [ ] ComptesModele
   - [ ] TransactionsModele
 
-> Page de Configuration Prefixes : 
-- [ ] CRUD pour les préfixes (côté opérateur)
-  - [ ] Ajouter Prefixes 
-  - [ ] Modifier Prefixes 
-  - [ ] Supprimer Prefixes 
-  - [ ] Filtrages Prefixes
-
-> Pages d'operation : 
-- [ ] CRUD pour les types d'opérations et barèmes de frais
-  - [ ]  fil
-- [ ] Calcul automatique des frais selon les tranches de montant
-- [ ] Tableau de bord opérateur (gains, situation des comptes clients)
-
-### Étudiant 2 : [Nom]
-- [ ] Interface de login automatique client (numéro de téléphone)
-- [ ] Création automatique de compte si inexistant
+- [ ] Interface de login automatique client (numéro de téléphone)  (home/Login):
+  - [ ] Fonction verification_user 
+  - [ ] Message d'auth 
+  - [ ] Page Login 
+  - [ ] Création automatique de compte si inexistant
 - [ ] Opérations client :
   - [ ] Voir solde
   - [ ] Dépôt (simulation)
@@ -54,5 +77,3 @@
 - [ ] Mise à jour de `base.sql` avec données de test
 - [ ] Documentation dans README.md (instructions d'installation)
 - [ ] Commit + Tag `v1`
-
-**Statut :** En cours / Terminé
