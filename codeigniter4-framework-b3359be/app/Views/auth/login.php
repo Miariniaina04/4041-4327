@@ -37,8 +37,8 @@
       </div>
 
       <div class="form-group mb-3">
-        <label class="form-label">Adresse email</label>
-        <input type="email" name="email" class="form-control" placeholder="exemple@gmail.com" />
+        <label class="form-label">telephone</label>
+        <input type="text" name="telephone" class="form-control" placeholder="0337208662" />
       </div>
 
       <button type="submit" class="btn-primary-custom">Se connecter</button>

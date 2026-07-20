@@ -40,21 +40,21 @@
 - [x] Configuration Sqlite et Codeigniter 3
   - [x] Database.php (Configuration sqlite)
 
-- [ ] Création de la base de données (`base.sql`) : tables `prefixes`, `operation_types`, `frais_barèmes`, `comptes`, `transactions`
+- [x] Création de la base de données (`base.sql`) : tables `prefixes`, `operation_types`, `frais_barèmes`, `comptes`, `transactions`
   - [x] Creation du `prefixes`
   - [x] Creation du  `operation_types`
   - [x] Creation du `frais_barèmes`
   - [x] Creation du `comptes`
   - [x] Creation du `transactions`
   
-- [ ] Insertion dans sqlite3 
+- [x] Insertion dans sqlite3 
 
-- [ ] Mise en place des modèles (Models) pour toutes les entités
-  - [ ] PrefixesModele
-  - [ ] OperationTypesModele
-  - [ ] FraisBaremesModele
-  - [ ] ComptesModele
-  - [ ] TransactionsModele
+- [x] Mise en place des modèles (Models) pour toutes les entités
+  - [x] PrefixesModele
+  - [x] OperationTypesModele
+  - [x] FraisBaremesModele
+  - [x] ComptesModele
+  - [x] TransactionsModele
 
 - [ ] Interface de login automatique client (numéro de téléphone)  (home/Login):
   - [ ] Fonction verification_user 
