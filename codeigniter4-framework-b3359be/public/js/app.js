@@ -6,44 +6,43 @@ if (loginForm) {
     loginForm.addEventListener('submit', async function(event) {
         event.preventDefault();
 
-        const useremail = this.querySelector('input[name="email"]');
-        const userpwd   = this.querySelector('input[name="mdp"]');
+        const telephone = this.querySelector('input[name="telephone"]');
         const generalErrorDiv  = document.getElementById('js-error-message');
         const generalErrorSpan = generalErrorDiv.querySelector('.msg-content');
 
         let isValid = true;
         generalErrorDiv.style.display = 'none';
-        [useremail, userpwd].forEach(i => i.classList.remove('input-error'));
+        telephone.classList.remove('input-error');
 
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(useremail.value)) {
-            useremail.classList.add('input-error');
-            isValid = false;
-        }
-        if (userpwd.value.length < 6) {
-            userpwd.classList.add('input-error');
+        const phoneRegex = /^[0-9]{8,14}$/;
+        if (!phoneRegex.test(telephone.value.trim())) {
+            telephone.classList.add('input-error');
             isValid = false;
         }
         if (!isValid) {
-            generalErrorSpan.innerText = "Veuillez corriger les erreurs.";
+            generalErrorSpan.innerText = "Veuillez saisir un numéro de téléphone valide.";
             generalErrorDiv.style.display = 'block';
             return;
         }
 
         try {
-            const response = await fetch(this.getAttribute('data-url'), {
+            const response = await fetch(this.getAttribute('data-url') || this.action, {
                 method: 'POST',
                 body: new FormData(this),
                 headers: { 'X-Requested-With': 'XMLHttpRequest' }
             });
-            const result = await response.json();
 
+            if (response.redirected) {
+                window.location.href = response.url;
+                return;
+            }
+
+            const result = await response.json();
             if (response.ok && result.success) {
                 window.location.href = result.redirect;
             } else {
                 generalErrorSpan.innerText = result.message || 'Identifiants incorrects.';
                 generalErrorDiv.style.display = 'block';
-                userpwd.classList.add('input-error');
             }
         } catch (err) {
             generalErrorSpan.innerText = "Serveur injoignable.";

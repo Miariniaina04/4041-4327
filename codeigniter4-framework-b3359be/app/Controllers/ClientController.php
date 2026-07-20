@@ -31,11 +31,16 @@ class ClientController extends BaseController
                 'solde' => 0
 
             ]);
-            $compte = $compteModel->findAll($newcompte);
+            $compte = $compteModel->find($newcompte);
         }
 
         session()->set('user_id',$compte['id']);
         session()->set('user_phone',$compte['telephone']);
-        return redirect()->to('client/dashboard');
+        return redirect()->to('/client/dashboard');
     }
+    public function dashboard(){
+        return view('client/dashboard');
+    }
+
+    
 }
