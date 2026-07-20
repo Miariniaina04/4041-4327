@@ -77,4 +77,16 @@ class TransactionsModele extends Model
     {
         return $this->insert($data);
     }
+
+    public function getHistoriqueParCompte($compteId)
+    {
+        return $this->select('transactions.*, operation_types.nom as type_nom')
+                    ->join('operation_types', 'operation_types.id = transactions.operation_type_id')
+                    ->groupStart()
+                        ->where('compte_id_from', $compteId)
+                        ->orWhere('compte_id_to', $compteId)
+                    ->groupEnd()
+                    ->orderBy('date_transaction', 'DESC')
+                    ->findAll();
+    }
 }

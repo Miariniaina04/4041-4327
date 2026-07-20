@@ -13,7 +13,7 @@
         <p>Solde : </p>
         
         <p>Vous êtes connecté et votre compte est prêt.</p>
-        <p><a href="<?= base_url('/operation') ?>">Effectuer un operation</a></p>
+        <p><a href="<?= base_url('/client/operation') ?>">Effectuer un operation</a></p>
 
     </main>
 </body>
