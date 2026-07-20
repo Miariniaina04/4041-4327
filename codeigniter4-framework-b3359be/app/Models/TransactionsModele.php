@@ -59,6 +59,21 @@ class TransactionsModele extends Model
                     ->findAll();
     }
 
+    public function getTransactionsByType($typeId)
+    {
+        return $this->where('operation_type_id', $typeId)
+                    ->orderBy('created_at', 'DESC')
+                    ->findAll();
+    }
+
+   public function getTransactionsByClient($clientId)
+    {
+        return $this->where('compte_id_from', $clientId) 
+                    ->orWhere('compte_id_to', $clientId) 
+                    ->orderBy('id', 'DESC') 
+                    ->findAll(); 
+    }
+
     public function getTransactionsByMontantRange($minMontant, $maxMontant)
     {
         return $this->where('montant >=', $minMontant)
@@ -67,10 +82,11 @@ class TransactionsModele extends Model
                     ->findAll();
     }
 
-    public function countTransactionByType($typeId)
+  public function getGainsParType()
     {
-        return $this->where('operation_type_id', $typeId)
-                    ->countAllResults();
+        return $this->select('operation_type_id, SUM(frais) as total_gains')
+                    ->groupBy('operation_type_id')
+                    ->findAll();
     }
 
     public function saveTransaction($data)

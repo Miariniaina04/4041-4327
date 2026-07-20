@@ -4,16 +4,19 @@ namespace App\Controllers;
 
 use App\Models\PrefixesModele;
 use App\Models\FraisBaremesModele;
+use App\Models\TransactionsModele;
 
 class OperateurController extends BaseController
 {
     protected $prefixeModel;
     protected $fraisModel;
+    protected $transactionModel;
 
     public function __construct()
     {
         $this->prefixeModel = new PrefixesModele();
         $this->fraisModel = new FraisBaremesModele();
+        $this->transactionModel = new TransactionsModele();
     }
 
     public function index()
@@ -113,7 +116,53 @@ class OperateurController extends BaseController
         return redirect()->to('/operateur');
     }
 
+
+    public function tableauGains()
+    {
+        $gainsData = $this->TransactionModel->getGainsParType();
+
+        $nomOperations = [
+            1 => 'Dépôt',
+            2 => 'Retrait',
+            3 => 'Transfert'
+        ];
+
+        $tableauBord = [];
+        foreach ($gainsData as $row) {
+            $idType = $row['operation_type_id'];
+            $tableauBord[] = [
+                'reference_id' => $idType,
+                'type_nom'     => $nomOperations[$idType] ?? 'Opération Inconnue',
+                'total_gains'  => (float)$row['total_gains']
+            ];
+        }
+
+        return view('Operateur/tableau_gains', ['fraisOperations' => $tableauBord]);
+    }
+
+    public function listeClients()
+    {
+        $data['clients'] = $this->comptesModel->orderBy('id', 'ASC')->findAll();
+        return view('Operateur/liste_clients', $data);
+    }
     
+    public function showClientTransactions($clientId)
+    {
+        $comptesModel = new \App\Models\ComptesModele();
+        $client = $comptesModel->find($clientId);
+        if (!$client) {
+            return redirect()->back()->with('error', 'Client introuvable.');
+        }
+
+        $transactions = $this->transactionModel->getTransactionsByClient($clientId); //
+
+        $data = [
+            'client'       => $client,
+            'transactions' => $transactions
+        ];
+
+        return view('Operateur/client_transactions', $data); //
+    }
     public function ajaxListPrefixes()
     {
         $request = service('request');
