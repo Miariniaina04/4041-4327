@@ -42,7 +42,7 @@ class ClientController extends BaseController
         session()->set('user_phone',$compte['telephone']);
         return redirect()->to('/client/dashboard');
     }
-
+   
     /**
      * Déconnexion de l'utilisateur
      */
@@ -58,8 +58,14 @@ class ClientController extends BaseController
         return redirect()->to('/login')
                         ->with('success', 'Vous avez été déconnecté avec succès.');
     }
+    
 
     public function dashboard(){
+        $telephoneId = session()->get('user_phone');
+        $compte = $this->compteModel->getCompteByTelephone($telephoneId);
+        $data = [
+            'soldeActuel' => $compte ? $compte['solde'] : 0.0
+        ];
         return view('client/dashboard');
     }
 
@@ -98,9 +104,6 @@ class ClientController extends BaseController
 
         $nomType = strtolower($typeOperation['nom']);
 
-        // ========================
-        // DÉPÔT
-        // ========================
         if ($nomType === 'depot') {
             if ($montant <= 0) {
                 return redirect()->back()->with('error', 'Montant invalide !');
@@ -123,9 +126,6 @@ class ClientController extends BaseController
             return redirect()->to('/client/dashboard')->with('success', 'Dépôt effectué avec succès !');
         }
 
-        // ========================
-        // RETRAIT
-        // ========================
         elseif ($nomType === 'retrait') {
             $frais = $fraisModel->calculerFrais('retrait', $montant);
             $montantTotal = $montant + $frais;

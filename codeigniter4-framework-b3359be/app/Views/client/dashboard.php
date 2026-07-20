@@ -4,14 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard client</title>
-    <!-- Chargement de votre Bootstrap Morph personnalisé -->
-        
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="<?= base_url('css/bootstrap.css') ?>">
-
+    <link href="<?= base_url('css/style.css') ?>" rel="stylesheet" />
 </head>
 <body style="background-color: var(--bs-body-bg); min-height: 100vh;">
 
@@ -46,7 +39,7 @@
                             <h6 class="text-uppercase text-muted fw-bold small mb-3">Mon Solde Actuel</h6>
                             <!-- Remplacer par votre variable dynamique pour le solde -->
                             <h2 class="display-6 fw-bold text-primary mb-0">
-                                <?= isset($solde) ? esc($solde) . ' Ar' : '0.00 Ar' ?>
+                               <?= number_format($soldeActuel, 2, ',', ' ') ?> Ar <!--[cite: 15] -->
                             </h2>
                         </div>
                         <div class="mt-4 pt-2 border-top border-light-subtle">
