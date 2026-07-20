@@ -71,10 +71,14 @@ class PrefixesModele extends Model
         return $this->where('actif', 1)->findAll();
     }
 
-    public function conversionTelephoneToPrefixe($telephone)
+    public function ckeckOperateur($telephone)
     {
+        $numero = trim(str_replace(' ', '', $telephone));
         $prefixe = substr($telephone, 0, 3);
-        return $this->prefixeModel->where('prefix', $prefixe)->first();
+        $operateur = $this->where('prefix', $prefixe)->first();
+        return $operateur ? $operateur : false;
     }
+
+
 
 }
