@@ -6,9 +6,10 @@ use CodeIgniter\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-        public function run()
+    public function run()
     {
-        //$this->call('CreneauSeeder');
-        
+        $this->call('PrefixSeeder');
+        $this->call('OperationTypeSeeder');
+        $this->call('CompteSeeder');
     }
 }
