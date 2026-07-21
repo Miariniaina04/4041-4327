@@ -1,3 +1,17 @@
-writable/logs/
-writable/cache/
-writable/session/
+writable/logs/*
+!writable/logs/.gitkeep
+
+writable/cache/*
+!writable/cache/.gitkeep
+
+writable/session/*
+!writable/session/.gitkeep
+
+writable/debugbar/*
+!writable/debugbar/.gitkeep
+
+writable/uploads/*
+!writable/uploads/.gitkeep
+
+# Ignorer la base SQLite 
+writable/database.db
