@@ -27,16 +27,16 @@
   - [x]  Tableau Frais de Transferts
     - [x] CRUD  
   
-- [ ] Calcul automatique des frais selon les tranches de montant : 
-  - [ ] Fonctions :
+- [x] Calcul automatique des frais selon les tranches de montant : 
+  - [x] Fonctions :
     - [x] calcul_Depot : Numero 1 -> Numero 1 (Aucun Frais)
     - [x] calcul_Retrait : Numero 1 <- Numero 1 (Avec Frais) 
     - [x] calcul_Transfert : Numero 1 -> Numero 2 (Avec Frais)
-    - [ ] calcul_Retrait_Transfert : Numero 1 <=> Numero 2 (Avec Frais)
+    - [x] calcul_Retrait_Transfert : Numero 1 <=> Numero 2 (Avec Frais)
   
-- [ ] Tableau de bord opérateur (gains, situation des comptes clients)  (auth/Gain) :
-  - [ ]  Tableau de Bord Gains pour chaque types (Tansfert et Retrait)
-  - [ ]  Situation Clients
+- [x] Tableau de bord opérateur (gains, situation des comptes clients)  (auth/Gain) :
+  - [x]  Tableau de Bord Gains pour chaque types (Tansfert et Retrait)
+  - [x]  Situation Clients
 
 ### Étudiant 2 : [ETU4041]
 
@@ -67,19 +67,19 @@
   - [x] Page Login 
   - [x] Création automatique de compte si inexistant
 - [ ] Opérations client :
-  - [ ] Voir solde
-  - [ ] Dépôt (simulation)
-  - [ ] Retrait (avec frais)
-  - [ ] Transfert vers autre numéro (avec frais)
-- [ ] Historique des transactions pour le client
-- [ ] Design Bootstrap + responsive (frontend global)
+  - [x] Voir solde
+  - [x] Dépôt (simulation)
+  - [x] Retrait (avec frais)
+  - [x] Transfert vers autre numéro (avec frais)
+- [x] Historique des transactions pour le client
+- [x] Design Bootstrap + responsive (frontend global)
 
 ### Tâches communes
-- [ ] Configuration des routes dans CodeIgniter
-- [ ] Mise en place de l'authentification simple (session par numéro)
+- [x] Configuration des routes dans CodeIgniter
+- [x] Mise en place de l'authentification simple (session par numéro)
 - [ ] Validation des numéros selon préfixes
 - [ ] Tests fonctionnels complets
-- [ ] Mise à jour de `base.sql` avec données de test
+- [x] Mise à jour de `base.sql` avec données de test (sauf pour transaction)
 - [ ] Documentation dans README.md (instructions d'installation)
 - [x] Commit + Tag `v1`
 
@@ -89,6 +89,7 @@
 
 ### Étudiant 1 : [Nom]
 - [ ] Configuration des préfixes pour les autres opérateurs (032, 031, etc.)
+  - [x] fonction
 - [ ] Ajout du champ `commission_pourcentage` dans les préfixes ou une nouvelle table
 - [ ] Gestion des transferts inter-opérateurs avec commission supplémentaire
 - [ ] Mise à jour du calcul des frais pour transferts vers autres opérateurs
@@ -101,6 +102,11 @@
 - [ ] Mise à jour du formulaire de transfert pour supporter plusieurs destinataires
 - [ ] Amélioration de l'interface client (Bootstrap)
 
+- [ ] css :
+  - [ ] operation/client
+  - [ ] operation/client/dashboard
+  - [ ] operatioin/client/situation
+  - [ ] 
 ### Tâches communes
 - [ ] Mise à jour de `base.sql` (nouvelles colonnes / tables si nécessaire)
 - [ ] Modification des modèles (CompteModel, FraisBaremeModel, etc.)
