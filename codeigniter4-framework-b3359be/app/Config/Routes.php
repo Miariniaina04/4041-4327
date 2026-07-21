@@ -27,8 +27,8 @@ $routes->get('/operateur/editBareme/(:num)', 'OperateurController::editBareme/$1
 $routes->post('/operateur/updateBareme/(:num)', 'OperateurController::updateBareme/$1');
 $routes->get('/operateur/desactiverPrefixe/(:num)', 'OperateurController::desactiverPrefixe/$1');
 $routes->get('/operateur/deleteBareme/(:num)', 'OperateurController::deleteBareme/$1');
-$routes->get('operateur/client', 'ClientController::listeClients');
-$routes->get('operateur/client/situation/(:num)', 'TransactionController::showClientTransactions/$1');
-
+$routes->get('operateur/client', 'OperateurController::listeClients');
+$routes->get('operateur/client/situation/(:num)', 'OperateurController::showClientTransactions/$1');
+$routes->get('operateur/client/dashboard', 'OperateurController::tableauGains');
 
 

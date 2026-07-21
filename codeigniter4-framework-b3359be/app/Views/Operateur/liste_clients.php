@@ -12,7 +12,7 @@
 <div class="container mt-5">
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h1 class="h3 text-secondary"><i class="fa fa-users text-primary me-2"></i> Liste des Comptes Clients</h1>
-    <a href="<?= base_url('operateur/dashboard') ?>" class="btn btn-outline-secondary btn-sm">
+    <a href="<?= base_url('operateur/client/dashboard') ?>" class="btn btn-outline-secondary btn-sm">
       <i class="fa fa-home"></i> Tableau de bord
     </a>
   </div>
@@ -43,7 +43,7 @@
                   </td>
                   <td class="text-center">
                     <!-- Le lien vers la situation détaillée du client -->
-                    <a href="<?= base_url('operateur/situation/' . $c['id']) ?>" class="btn btn-primary btn-sm px-3">
+                    <a href="<?= base_url('operateur/client/situation/' . $c['id']) ?>" class="btn btn-primary btn-sm px-3">
                       <i class="fa fa-eye me-1"></i> Voir la situation
                     </a>
                   </td>

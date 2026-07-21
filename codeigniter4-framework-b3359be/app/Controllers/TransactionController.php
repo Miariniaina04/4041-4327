@@ -4,20 +4,42 @@ namespace App\Controllers;
 
 use App\Models\TransactionsModele;
 use App\Models\ComptesModele;
+use App\Models\PrefixesModele;
+use App\Models\FraisBaremesModele;
 
 class TransactionController extends BaseController
 { 
     protected $transaction;
     protected $fraisModel;
+    protected $prefixeModel;
+    protected $compteModel;
 
     public function __construct()
     {
-        $this->comptesModel = new ComptesModele();
+        $this->compteModel = new ComptesModele();
+        $this->fraisModel = new FraisBaremesModele();
         $this->transaction = new TransactionsModele();
+        $this->prefixeModel = new PrefixesModele();
     }
 
     public function index()
     {
+        $sessionPhone = session()->get('user_phone') ?: "0337208662"; 
+        $compte = $this->compteModel->getCompteByTelephone($sessionPhone);
+
+        if (!$compte) {
+            return redirect()->to('/client/dashboard')->with('error', 'Compte introuvable');
+        }
+
+        $transactions = $this->transaction
+                    ->where('compte_id_from', $compte['id'])
+                    ->orWhere('compte_id_to', $compte['id'])
+                    ->orderBy('date_transaction', 'DESC')
+                    ->findAll();
+        return view('client/historique', [
+            'compte'       => $compte,
+            'transactions' => $transactions
+        ]);
         $sessionPhone = session()->get('user_phone') ?: "0337208662"; 
         $compte = $this->compteModel->getCompteByTelephone($sessionPhone);
 
@@ -109,22 +131,22 @@ class TransactionController extends BaseController
 
         if ($this->transaction->insert($transactionData)) {
             return redirect()->to('/client/transaction')->with('success', 'Opération validée et enregistrée !');
+            return redirect()->to('/client/transaction')->with('success', 'Opération validée et enregistrée !');
         } else {
             return redirect()->back()->with('error', 'Une erreur est survenue lors de l\'enregistrement.');
         }
     }
 
     public function validerTransfert()
-    {
-        
-        helper('phone');
-        $numeroDestinataire = $this->request->getPost('compte_destination');
-        $operateurDetecte = $this->prefixeModel->ckeckOperateur($numeroDestinataire);
+        {
+            
+            helper('phone');
+            $numeroDestinataire = $this->request->getPost('compte_destination');
+            $operateurDetecte = $this->prefixeModel->ckeckOperateur($numeroDestinataire);
 
         if ($operateurDetecte === null) {
             return redirect()->back()->with('error', 'Numéro de téléphone du destinataire invalide ou préfixe non reconnu.');
         }
 
 }
-
 }

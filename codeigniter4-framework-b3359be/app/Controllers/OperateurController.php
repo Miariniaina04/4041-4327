@@ -156,7 +156,7 @@ class OperateurController extends BaseController
             ];
         }
 
-        return view('Operateur/tableau_gains', ['fraisOperations' => $tableauBord]);
+        return view('Operateur/tableau_gain', ['fraisOperations' => $tableauBord]);
     }
 
     public function listeClients()
@@ -179,7 +179,7 @@ class OperateurController extends BaseController
             'transactions' => $transactions
         ];
 
-        return view('Operateur/client_transactions', $data); //
+        return view('Operateur/situation', $data); //
     }
 
     public function ajaxListPrefixes()

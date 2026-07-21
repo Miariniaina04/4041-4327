@@ -53,7 +53,7 @@ class OperationController extends BaseController
         if (!$bareme) {
                 return null; 
             } 
-            return $montant + $bareme['frais'];
+        return $montant + $bareme['frais'];
     }
 
     public function verifierPrefixeCompteDestinataire($telComptes,$telDest)
@@ -74,7 +74,7 @@ class OperationController extends BaseController
 
     public function soumissionTransfert($telComptes, $montant, $telephoneDest, $typeId)
     {
-        $prefixe = $this->prefixeModele->verifierPrefixeCompteDestinataire($telComptes, $telephoneDest);
+        $prefixe = $this->prefixeModel->verifierPrefixeCompteDestinataire($telComptes, $telephoneDest);
         if ($prefixe == true) {
             $frais = $this->calcul_montant_frais($typeId, $montant);
         } else {
@@ -116,7 +116,7 @@ class OperationController extends BaseController
 
     // On récupère aussi juste la valeur des frais pour l'afficher
     $bareme = $this->fraisModel->getFraisByMontant($typeId, $montant);
-
+    $frais = $bareme ? (float)$bareme['frais'] : 0;
         return $this->response->setJSON([
             'status' => 'success',
             'frais'  => $frais,
