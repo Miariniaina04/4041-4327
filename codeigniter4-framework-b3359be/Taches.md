@@ -141,3 +141,20 @@
 - [ ] affichage de la promotion simple
   - [ ] dupliquer form transfer -> prom/tranfert 
 - [ ] 
+
+
+### Alea 
+Notion d'epargne 
+  - pourcentage (choisis par client)
+  - a chaque transfert (prend le pourcentage choisis par le client, les autres dans le solde)
+
+- [] mis a jour de database 
+- [] creation de tables epargne (id,id_comptes,poucentage_epargne)
+- [ ] Mis a jour Migration
+- [] creation de EpargneSeeder 
+- [ ] creation EpargneModele
+-  [ ] creation EpargneController
+-  [ ] creation pages views (client/Epargne/)
+   -  [ ] index.php
+      -  [ ] afficher le solde et les epargnes 
+  

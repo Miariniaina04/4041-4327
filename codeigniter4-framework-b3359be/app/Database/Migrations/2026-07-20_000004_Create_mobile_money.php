@@ -62,12 +62,14 @@ class CreateMobileMoney extends Migration
             'date_transaction' => ['type' => 'DATETIME', 'default' => new RawSql('CURRENT_TIMESTAMP')],
             'statut' => ['type' => 'VARCHAR', 'constraint' => 20, 'default' => 'success'],
         ]);
+
+        
         $this->forge->addKey('id', true);
         $this->forge->addForeignKey('compte_id_from', 'comptes', 'id', 'SET NULL', 'CASCADE');
         $this->forge->addForeignKey('compte_id_to', 'comptes', 'id', 'SET NULL', 'CASCADE');
         $this->forge->addForeignKey('operation_type_id', 'operation_types', 'id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('transactions');
-
+        
         $this->forge->addField([
             'id' => [ 'type' => 'INTEGER', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
             'prefix_source_id' => ['type' => 'INTEGER', 'constraint' => 11, 'unsigned'   => true],
@@ -75,6 +77,8 @@ class CreateMobileMoney extends Migration
             'commission_pourcentage' => [ 'type' => 'DECIMAL', 'constraint' => '5,2','default' => 0.00],
             'date_cree' => [ 'type' => 'DATETIME', 'default' => new RawSql('CURRENT_TIMESTAMP')],
         ]);
+        
+        
         $this->forge->addKey('id', true);
         $this->forge->addForeignKey('prefix_source_id', 'prefixes', 'id', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey('prefix_dest_id', 'prefixes', 'id', 'CASCADE', 'CASCADE');
@@ -87,6 +91,27 @@ class CreateMobileMoney extends Migration
         ]);
         $this->forge->addForeignKey('operation_type_id', 'operation_types', 'id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('promotions');
+        
+        $this->forge->addField([
+            'id' => ['type' => 'INTEGER', 'unsigned' => true, 'auto_increment' => true],
+            'id_telephone' => ['type' => 'INTEGER', 'null' => true],
+            'id_pourcentage' => ['type' => 'INTEGER', 'null' => true],
+            'epargne' => ['type' => 'DECIMAL', 'constraint' => '15,2', 'null' => false],
+            'date_creation' => ['type' => 'DATETIME', 'default' => new RawSql('CURRENT_TIMESTAMP')],
+        ]);
+        $this->forge->addKey('id', true);
+        $this->forge->addForeignKey('id_telephone', 'comptes', 'id', 'SET NULL', 'CASCADE');
+        $this->forge->addForeignKey('id_pourcentage', 'epargne_pourcentages', 'id', 'SET NULL', 'CASCADE');
+        $this->forge->createTable('epargnes');
+
+        $this->forge->addField([
+            'id' => [ 'type' => 'INTEGER', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
+            'id_epargne' => ['type' => 'INTEGER', 'constraint' => 11, 'unsigned'   => true],
+            'pourcentage' => [ 'type' => 'DECIMAL', 'constraint' => '5,2','default' => 0.00],
+        ]);
+        $this->forge->addKey('id', true);
+        $this->forge->addForeignKey('id_epargne', 'epargnes', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->createTable('epargnes_pourcentages');
     }
 
     public function down()

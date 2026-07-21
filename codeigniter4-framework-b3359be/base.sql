@@ -94,3 +94,23 @@ INSERT OR IGNORE INTO promotions (operation_type_id, prom_pourcentage) VALUES
 (2, 2),
 (3, 3);
 
+
+
+CREATE TABLE IF NOT EXISTS epargnes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_telephone INTEGER,
+    id_pourcentage INTEGER,
+    epargne REAL DEFAULT 0.0,
+    date_creation DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_telephone) REFERENCES comptes(id_telephone),
+    FOREIGN KEY (id_pourcentage) REFERENCES epargne_pourcentages(id_epargne)
+);
+
+CREATE TABLE IF NOT EXISTS epargne_pourcentages (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_epargne INTEGER,
+    pourcentage DECIMAL(5,2) DEFAULT 0.0,  -- ex: 1.5 %
+    FOREIGN KEY (id_epargne) REFERENCES epargne(id_epargne)
+);
+
+

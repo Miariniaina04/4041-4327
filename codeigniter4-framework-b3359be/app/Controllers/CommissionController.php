@@ -29,20 +29,21 @@ class CommissionController extends BaseController
         return view('commission/index', $data);
         
     }
-
-    public function create()
+    
+    public function montantCommission($montant)
     {
-        return view('commission/create');
-    }
-
-    public function montantCommission($typeId, $montant)
-    {
-        $bareme = $this->fraisBaremes->getFraisByMontant($typeId, $montant);
+        $bareme = $this->fraisBaremes->getFraisByMontant(3, $montant);
         if (!$bareme) {
             return null; 
         } 
         return $bareme['frais'];
     }
+    
+    public function create()
+    {
+        return view('commission/create');
+    }
+
 
 
     public function verifierPrefixeCompteDestinataire($telComptes,$telDest)
