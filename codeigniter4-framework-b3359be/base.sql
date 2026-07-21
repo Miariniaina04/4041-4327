@@ -82,3 +82,15 @@ INSERT OR IGNORE INTO commissions_inter (prefix_source_id,prefix_dest_id) VALUES
 (1, 2, 1.5),
 (1, 3, 2.0),
 (2, 3, 1.0);
+
+CREATE TABLE IF NOT EXISTS promotions(
+    operation_type_id INTEGER NOT NULL,
+    prom_pourcentage DECIMAL(5,2) DEFAULT 0.0,  -- ex: 1.5 %
+    FOREIGN KEY (operation_type_id) REFERENCES operation_types(id),
+);
+
+INSERT OR IGNORE INTO promotions (operation_type_id, prom_pourcentage) VALUES
+(1, 1),
+(2, 2),
+(3, 3);
+

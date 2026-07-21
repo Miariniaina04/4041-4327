@@ -13,5 +13,7 @@ class DatabaseSeeder extends Seeder
         $this->call('CompteSeeder');
         $this->call('FraisBaremeSeeder');
         $this->call('CommissionSeeder');
+        $this->call('PromotionsSeeder');
+
     }
 }

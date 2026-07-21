@@ -32,4 +32,4 @@ $routes->get('operateur/client', 'OperateurController::listeClients');
 $routes->get('operateur/client/situation/(:num)', 'OperateurController::showClientTransactions/$1');
 $routes->get('operateur/client/dashboard', 'OperateurController::tableauGains');
 
-
+$routes->get('prom/transfert', 'PromotionController::index');

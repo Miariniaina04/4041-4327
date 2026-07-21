@@ -116,3 +116,28 @@
 - [x] Commit + création du Tag `v2`
 
 **Statut Version 2 :** En cours 
+
+## envoye tags step
+```
+ git tag -a nom_tag -m "message tag"
+ git tag
+
+```
+
+## promotion en pourcentage ny frais de transfert si meme operateur
+- tsy maintsy amprimina any anaty base
+- [ ] creation de base de donnee promotion
+  - [x] base.sql
+- [x] creation de migrate
+- [x] creation de seeder promotion
+- [x] creation de modele par rapport a la table
+- [x] autorise l'acces au fields
+- [x] creation du controlleur
+- [x] creation du fonction dans modele
+- [ ] creation du function dans controlleur
+  - [ ] verfier si meme operateur 
+  - [ ] ajout de la promotion
+- [ ] routage dans route
+- [ ] affichage de la promotion simple
+  - [ ] dupliquer form transfer -> prom/tranfert 
+- [ ] 

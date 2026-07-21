@@ -79,6 +79,14 @@ class CreateMobileMoney extends Migration
         $this->forge->addForeignKey('prefix_source_id', 'prefixes', 'id', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey('prefix_dest_id', 'prefixes', 'id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('commissions_inter');
+
+        // promotions
+        $this->forge->addField([
+            'operation_type_id' => ['type' => 'INTEGER', 'constraint' => 11, 'unsigned'   => true],
+            'prom_pourcentage' => [ 'type' => 'DECIMAL', 'constraint' => '5,2','default' => 0.00],
+        ]);
+        $this->forge->addForeignKey('operation_type_id', 'operation_types', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->createTable('promotions');
     }
 
     public function down()

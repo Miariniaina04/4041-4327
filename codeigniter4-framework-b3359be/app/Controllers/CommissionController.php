@@ -10,6 +10,9 @@ use App\Models\FraisBaremesModele;
 
 class CommissionController extends BaseController
 {
+    protected $commissionModel;
+    protected $prefixesModel;
+    protected $fraisBaremes;
     public function __construct()
     {
         $this->commissionModel = new CommissionModele();
