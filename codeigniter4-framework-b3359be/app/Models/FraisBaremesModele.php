@@ -70,7 +70,6 @@ class FraisBaremesModele extends Model
             return $bareme['frais'] + ($bareme['frais'] * 0.05); 
 
         return null; 
-    }  
-
-
+        }  
+    }
 }

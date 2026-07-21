@@ -35,10 +35,3 @@
    ```
    php spark serve
    ```
-git add codeigniter4-framework-b3359be/writable/cache/.gitkeep codeigniter4-framework-b3359be/writable/logs/.gitkeep codeigniter4-framework-b3359be/writable/session/.gitkeep codeigniter4-framework-b3359be/writable/uploads/.gitkeep codeigniter4-framework-b3359be/writable/debugbar/.gitkeep codeigniter4-framework-b3359be/.gitignore
-git commit -m "Fix writable"
-git push
-
-git rm --cached codeigniter4-framework-b3359be/writable/database.db
-git commit -m "Ne plus versionner la base SQLite"
-git push
