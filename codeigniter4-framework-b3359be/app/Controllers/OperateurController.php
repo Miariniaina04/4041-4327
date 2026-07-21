@@ -28,25 +28,13 @@ class OperateurController extends BaseController
         try {
 
             $baremes = $this->fraisModel->findAll();
-            $baremes_transfert = $this->fraisModel->getByOperationType(3);
-            $commissions = [];
-            foreach ($baremes_transfert as $bareme) {
-                $commissions[] = [
-                    'id' => $bareme['id'],
-                    'min_montant' => $bareme['min_montant'],
-                    'max_montant' => $bareme['max_montant'],
-                    'frais' => $bareme['frais'],
-                    'commission' => $bareme['frais'] + ($bareme['frais'] * 0.05)
-                ];
-            }
             
             $data = [
                 'prefixes' => $this->prefixeModel->findAll(),
-                'baremes'  => $baremes,
-                'commissions' => $commissions
+                'baremes'  => $baremes
             ];
         } catch (\Throwable $e) {
-            $data = ['prefixes' => [], 'baremes' => [], 'commissions' => [], 'error' => $e->getMessage()];
+            $data = ['prefixes' => [], 'baremes' => [], 'error' => $e->getMessage()];
         }
 
         return view('Operateur/index', $data);

@@ -56,34 +56,6 @@ class OperationController extends BaseController
         return $montant + $bareme['frais'];
     }
 
-    public function verifierPrefixeCompteDestinataire($telComptes,$telDest)
-    {
-        $prefixeCompte = substr($telComptes, 0, 3);
-        $prefixeDest = substr($telDest, 0, 3);
-
-        $operateurCompte = $this->prefixeModel->getOperateurByPrefixe($prefixeCompte);
-        $operateurDest = $this->prefixeModel->getOperateurByPrefixe($prefixeDest);
-
-        if ($operateurCompte = $operateurDest) {
-            return true; 
-        }
-        else {
-            return false; 
-        }
-    }
-
-    public function soumissionTransfert($telComptes, $montant, $telephoneDest, $typeId)
-    {
-        $prefixe = $this->prefixeModel->verifierPrefixeCompteDestinataire($telComptes, $telephoneDest);
-        if ($prefixe == true) {
-            $frais = $this->calcul_montant_frais($typeId, $montant);
-        } else {
-            $frais = $this->fraisModel->commissionTransfert($montant);
-        }
-
-        return $frais;
-    }
-
     public function obtenirCalculFraisAjax()
     {
         // Vérification que c'est bien une requête AJAX

@@ -4,15 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class FraisBaremesModele extends Model
+class CommissionModele extends Model
 {
-    protected $table            = 'frais_baremes';
+    protected $table            = 'commissions_inter';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['operation_type_id', 'min_montant', 'max_montant', 'frais'];
+    protected $allowedFields    = [];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -44,33 +44,7 @@ class FraisBaremesModele extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function getByOperationType($typeId)
-    {
-        return $this->where('operation_type_id', $typeId)
-                    ->orderBy('min_montant', 'ASC')
-                    ->findAll();
-    }
-
-    public function getFraisByMontant($typeId, $montant)
-    {
-        return $this->where('operation_type_id', $typeId)
-                    ->where('min_montant <=', $montant)
-                    ->where('max_montant >=', $montant)
-                    ->first();
-    }
-
-    public function commissionTransfert($montant)
-    {
-        $bareme = $this->where('operation_type_id', 3)
-                       ->where('min_montant <=', $montant)
-                       ->where('max_montant >=', $montant)
-                       ->first();
-
-        if ($bareme) {
-            return $bareme['frais'] + ($bareme['frais'] * 0.05); 
-
-        return null; 
-    }  
+    
 
 
 }
